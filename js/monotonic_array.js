@@ -16,3 +16,4 @@ function isMonotonic(array) {
       return false;
     }
   }
+}
