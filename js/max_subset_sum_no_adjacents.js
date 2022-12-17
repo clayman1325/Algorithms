@@ -1,15 +1,17 @@
-function maxSubsetSumNoAdjacent(array) {
-  if (array.length == 0) { return 0 }
-  if (array.length == 1) { return array[0] }
-  
-  const maxSums = array.slice();
-  maxSums[1] = Math.max(array[0], array[1])
-
-  for(let i= 2; i < array.length; i++) {
-    maxSums[i] = Math.max(maxSums[i - 1], maxSums[i-2] + array[i])
+function numberOfWaysToMakeChange(n, denoms) {
+  count = 0;
+  for(let i = denoms.length - 1; i >= 0; i--){
+    if(denoms[i] > n) { denoms.splice(i,1) }
   }
-  
-  return maxSums[maxSums.length - 1];
+ 
+  for(let i = 0; i < denoms.length; i++){
+    currentValue = denoms[i];
+    while(currentValue < n){
+      currentValue += denoms[i]
+    }
+    if (currentValue == n) { count++}
+  }
+  return count
 }
 
-exports.maxSubsetSumNoAdjacent = maxSubsetSumNoAdjacent;
+exports.numberOfWaysToMakeChange = numberOfWaysToMakeChange;
