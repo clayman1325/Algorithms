@@ -2,7 +2,7 @@ function zeroSumSubarray(nums) {
   let partialSum = 0
  
   for(let i = 0; i<nums.length; i++) {
-    partialSum = nums[i];
+    partialSum = nums[i];645PM
 
     if(partialSum == 0) { return true }
 
