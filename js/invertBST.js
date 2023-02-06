@@ -1,19 +1,3 @@
-function invertBinaryTree(tree) {
-  if(!tree){
-    return null
-  }
-
-  const leftNode  = tree.left;
-  const rigthNode = tree.right;
-
-  tree.right = leftNode;
-  tree.left = rigthNode;
-
-  invertBinaryTree(tree.left)
-  invertBinaryTree(tree.right)
-}
-
-// This is the class of the input binary tree.
 class BinaryTree {
   constructor(value) {
     this.value = value;
@@ -22,5 +6,29 @@ class BinaryTree {
   }
 }
 
+function binaryTreeDiameter(tree) {
+  const result = BTDiameterRec(tree);
+
+  return Math.max(result[0] - 1, result[1]);
+}
+
+function BTDiameterRec(tree) {
+  if(tree == null) {
+    return [0,0]
+  }
+
+  const lengthLeft  = BTDiameterRec(tree.left);
+  const lengthRight = BTDiameterRec(tree.right);
+  
+  let length            = lengthLeft[0] + lengthRight[0];
+  const maxDiameter     = Math.max(lengthLeft[1], lengthRight[1]);
+  const currentDiameter = Math.max(length, maxDiameter);
+  length                = Math.max(lengthLeft[0], lengthRight[0]) + 1
+  
+  return [length, currentDiameter]
+}
+
+
 // Do not edit the line below.
-exports.invertBinaryTree = invertBinaryTree;
+exports.binaryTreeDiameter = binaryTreeDiameter;
+exports.BinaryTree = BinaryTree;
