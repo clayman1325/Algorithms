@@ -1,23 +1,13 @@
-function numberOfWaysToMakeChange(n, denoms) {
-  const waysOfMakeChange = [];
+function kadanesAlgorithm(array) {
+  let maxNum     = array[0];
+  let currentMax = array[0];
 
-  for(let i = 0; i <= n; i++) {
-    waysOfMakeChange[i] = 0
+  for(let i = 1; i < array.length; i++) {
+    currentMax = Math.max(array[i], currentMax + array[i])
+    maxNum     = Math.max(maxNum, currentMax)
   }
-  
-  waysOfMakeChange[0] = 1;
-  
-  for(let denom of denoms){
-    for(let amount = 1; amount < n + 1; amount++) {
-      if(denom <= amount) {
-        waysOfMakeChange[amount] += waysOfMakeChange[amount - denom]
-      }
-    }
-  }
-
-  return waysOfMakeChange[n];
+  return maxNum;
 }
 
 // Do not edit the line below.
-exports.numberOfWaysToMakeChange = numberOfWaysToMakeChange;
- 
+exports.kadanesAlgorithm = kadanesAlgorithm;
