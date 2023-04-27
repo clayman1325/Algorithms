@@ -1,5 +1,7 @@
 const input2 = "a-/gf-bGt";
 console.log(input2, reverseString(input2));
+
+
 var reverseString = (string) => {
     string = string.split("");
     let left = 0;
@@ -14,16 +16,8 @@ var reverseString = (string) => {
             return (!found && ascii >=65 && ascii <=122)
         }
 
-        if(isLetter(foundLeft, lAscii)) {
-            foundLeft = true;
-        } else if(!foundLeft){
-            left++
-        }
-        if(isLetter(foundRight, rAscii)) {
-            foundRight = true;
-        } else if(!foundRight){
-            right--
-        }
+        left, foundLeft = updatePointer("left",  left,  foundLeft, lAscii);
+        right, foundRight = updatePointer("right", right, foundRight, rAscii);
 
         if(foundLeft && foundRight) {
             const aux = string[left];
@@ -36,4 +30,14 @@ var reverseString = (string) => {
         }
     }
     return string.join("")
+}
+
+const updatePointer = (name, pointer, foundPointer, ascii) => {
+    if((!foundPointer && ascii >=65 && ascii <=122)) {
+        foundPointer = true;
+    } else if(!foundPointer){
+        pointer = name === "left" ? pointer + 1 : pointer - 1;
+    }
+
+    return [pointer, foundPointer];
 }
