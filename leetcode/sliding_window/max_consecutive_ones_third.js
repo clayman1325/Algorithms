@@ -1,3 +1,20 @@
+var longestOnes = function(nums, k) {
+    let count = 0;
+    let max = 0;
+    let zeros = 0;
+    for(let i = 0; i < nums.length; i++) {
+        if(nums[i] == 1 || zeros < k) {
+            if(nums[i] == 0) zeros++;
+            count++
+        } else {
+            max = max < count ? count : max;
+            count--;
+            zeros--;
+        }
+    }
+    return max < count ? count : max;
+}
+
 var longestOnes2 = function(nums, k) {
     let zeros = 0;
     let l = 0;
