@@ -15,4 +15,4 @@ var maxOperations = function(nums, k) {
     }
 
     return total;
-};
+};  
